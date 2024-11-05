@@ -3,3 +3,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 500px;
+}
+
+.calculator-buttons>* {
+    flex: 1;
+    width: 100px;
+    height: 80px;
+}
