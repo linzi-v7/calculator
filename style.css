@@ -4,18 +4,36 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .calculator-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+
     width: 450px;
     height: 500px;
+
+    border: 2px solid black;
+}
+
+.calculator-display {
+    flex: 1 0 auto;
+    text-align: end;
+    font-size: 80px;
+    width: 400px;
 }
 
 .calculator-buttons {
+    flex: 0 0 75%;
     display: flex;
     flex-wrap: wrap;
+
 
 }
 
@@ -23,6 +41,7 @@
     flex: 1 0 25%;
     width: 100px;
     height: 80px;
+    font-size: 40px;
 }
 
 .clear {
