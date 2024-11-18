@@ -24,6 +24,10 @@ digitsContainer.addEventListener("click", function (event)
         let input = event.target.innerText;
         populateDisplay(input);
     }
+    else if (event.target.matches(".delete"))
+    {
+        deleteFromDisplay();
+    }
     else if (event.target.matches(".operator"))
     {
         //edge case:  calculator should not evaluate more than a single pair of numbers at a time
@@ -98,6 +102,11 @@ function populateDisplay(input)
 
     let display = document.querySelector(".calculator-display");
 
+    if (display.innerText.includes(".") && input == ".") //to avoid having 2 decimal seperators
+    {
+        return;
+    }
+
     if (display.innerText == "0" || showResult == true || firstNumberChosen == true)
     {
         display.innerText = "";
@@ -114,8 +123,22 @@ function populateDisplay(input)
     }
 }
 
+function deleteFromDisplay()
+{
+    let display = document.querySelector(".calculator-display");
+
+    display.innerText = display.innerText.slice(0, -1)
+
+
+    if (display.innerText == "") //if text is now empty
+    {
+        display.innerText = "0";
+    }
+}
+
 function clearAll()
 {
+    firstNumberChosen = true; //to trigger clear
     populateDisplay(0)
     firstNumber = 0;
     firstNumberChosen = false;
@@ -124,3 +147,47 @@ function clearAll()
     showResult = false;
 
 }
+
+
+//keyboard support, can be implemented better with no code repetition. this is just a rushed feature.
+document.addEventListener("keydown", function (event)
+{
+    const key = event.key;
+
+    if (!isNaN(key)) //is digit
+    {
+        populateDisplay(key);
+    }
+    else if (["+", "-", "*", "/"].includes(key))
+    {
+        //edge case
+        if (chosenOperation !== " " && firstNumberChosen)
+        {
+            showResult = true;
+            operate(firstNumber, secondNumber, chosenOperation);
+            showResult = false;
+            return;
+        }
+        chosenOperation = key;
+        firstNumberChosen = true;
+    }
+    else if (key === "Enter") //equals
+    {
+        showResult = true;
+        operate(firstNumber, secondNumber, chosenOperation);
+        showResult = false;
+    }
+    else if (key === "Escape") 
+    {
+        clearAll();
+    }
+    else if (key === "Backspace")
+    {
+        deleteFromDisplay();
+    }
+    else if (key === ".")
+    {
+        populateDisplay(".");
+
+    }
+});
