@@ -24,7 +24,7 @@ body {
 }
 
 .calculator-display {
-
+    overflow: hidden;
     flex: 1 0 auto;
     text-align: end;
     font-size: 80px;
