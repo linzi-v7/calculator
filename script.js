@@ -1,10 +1,12 @@
 
-
+let firstNumber = 0;
+let chosenOperation = " "
+let secondNumber = 0;
 
 const equalsButton = document.querySelector(".equal");
-equalsButton.addEventListener("click", function () { calculate(1, 1, "+") })
+equalsButton.addEventListener("click", function () { operate(1, 1, "+") })
 
-function calculate(num1, num2, operation)
+function operate(num1, num2, operation)
 {
     if ((num1 == undefined) || (num2 == undefined))
     {
@@ -31,4 +33,15 @@ function calculate(num1, num2, operation)
         default:
             console.log("error, invalid operation");
     }
+}
+
+function populateDisplay(input)
+{
+    let display = document.querySelector(".calculator-display");
+
+    if (display.innerText == "0")
+    {
+        display.innerText = "";
+    }
+    display.innerText += input
 }
